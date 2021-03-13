@@ -1,0 +1,60 @@
+.code {
+  /* border: 1px solid red; */
+  background-color: var(--bg-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+.test {
+  padding: 10px 30px;
+}
+.reader {
+  /* border: 1px solid red; */
+}
+.auth-failed {
+  font-size: 4rem;
+  color: var(--primary-color);
+  align-self: center;
+  margin-bottom: 20px;
+}
+.message-client {
+  display: flex;
+  width: 300px;
+  flex-direction: column;
+
+  justify-content: center;
+  align-items: center;
+}
+.error-message > p {
+  font-size: 1.2rem;
+}
+.qr-reader {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 20px 40px;
+  background-color: white;
+}
+
+@media (min-width: 480px) {
+  .code {
+    /* background-color: green; */
+  }
+}
+
+@media (min-width: 768px) {
+  .code {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .code {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .code {
+    /* background-color: orange; */
+  }
+}

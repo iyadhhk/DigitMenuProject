@@ -1,0 +1,165 @@
+.worker {
+  /* border: 2px solid green; */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding-top: 60px;
+}
+.worker > h2 {
+  font-weight: 400;
+}
+.butt-pay {
+  color: #c42012;
+}
+
+.worker__tables {
+  margin: 20px 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-width: 300px;
+}
+.worker__tables > p {
+  font-size: 1.1rem;
+}
+.worker__tables > select {
+  padding: 10px 20px;
+  outline: none;
+  border: none;
+  border-bottom: 1px solid #c42012;
+}
+
+.worker__orders {
+  /* border: 1px solid red; */
+  padding: 10px;
+  box-shadow: rgba(0, 0, 0, 0.15) 0px 2px 8px;
+  width: 300px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+}
+/* .worker__orders button {
+  background: #c42012;
+  width: 100%;
+  height: 40px;
+  font-size: 0.9rem;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+} */
+.button__req__reject {
+  color: white;
+  background-color: red;
+  border-radius: 5px;
+  height: 40px;
+  width: 80px;
+  margin-left: 30px;
+  font-size: 0.9rem;
+  border: none;
+  cursor: pointer;
+}
+
+.req__dmd {
+  color: red;
+}
+
+.button__req__valid {
+  color: red;
+  background-color: white;
+  border-color: red;
+  border-radius: 5px;
+  height: 40px;
+  width: 80px;
+  margin-left: 30px;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.req__info {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.req__info__msg {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  background-color: indianred;
+}
+.worker__orders__items {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #48b9a0;
+  /* background-color: green; */
+  margin-bottom: 20px;
+  padding: 10px;
+}
+.worker__orders__items p {
+  font-size: 0.9rem;
+}
+
+.butt__response {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 250px;
+  height: 90px;
+}
+.timeline {
+  margin-top: 10px;
+  text-transform: lowercase;
+  align-self: flex-end;
+  font-size: small;
+  color: #48b9a0;
+}
+.comment {
+  margin-top: 10px;
+  text-transform: lowercase;
+  align-self: flex-start;
+  font-size: small;
+  color: var(--primary-color);
+  display: none;
+}
+.comment > span {
+  text-transform: uppercase;
+  color: var(--primary-color);
+}
+.worker__orders__items__info {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+}
+
+@media (min-width: 480px) {
+  .worker__orders {
+    min-width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .worker__orders {
+    min-width: 700px;
+  }
+  .comment {
+    display: block;
+  }
+
+  .butt__response {
+    flex-direction: row;
+  }
+
+  .req__dmd {
+  }
+}
+
+@media (min-width: 1024px) {
+  .worker {
+  }
+}
+
+@media (min-width: 1280px) {
+}

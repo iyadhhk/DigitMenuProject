@@ -1,0 +1,75 @@
+.tables {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 20px;
+}
+.tables__single-table {
+  margin-bottom: 20px;
+  width: 300px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #1b2431;
+}
+
+.tables > h4 {
+  text-transform: uppercase;
+  font-weight: 400;
+  margin: 20px;
+  text-align: center;
+}
+
+.tables__single-table__info > h4 {
+  font-weight: 400;
+  color: #1b2431;
+}
+.tables__single-table__info > p {
+  margin-top: 10px;
+  font-size: 1.1rem;
+  text-align: center;
+  flex: 1;
+}
+
+.tables__single-table > img {
+  height: 100px;
+}
+.tables__single-table__buttons {
+  display: flex;
+  flex-direction: column;
+}
+.tables__single-table__buttons > button {
+  margin-bottom: 5px;
+  flex: 1;
+  background: #c42012;
+  padding: 10px;
+  font-size: 0.9rem;
+  border: none;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (min-width: 480px) {
+  .tables__single-table {
+    width: 400px;
+  }
+}
+
+@media (min-width: 768px) {
+  .tables {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .tables {
+    /* background-color: purple; */
+  }
+}
+
+@media (min-width: 1280px) {
+  .tables {
+    /* background-color: orange; */
+  }
+}

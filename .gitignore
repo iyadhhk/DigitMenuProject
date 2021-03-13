@@ -1,0 +1,4 @@
+node_modules
+./client/node_modules
+tache restantes.txt
+./client/.env

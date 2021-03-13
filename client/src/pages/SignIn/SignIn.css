@@ -1,0 +1,104 @@
+.signin {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-light);
+}
+
+.signin__container {
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  width: 300px;
+  /* height: 400px; */
+  display: flex;
+  flex-direction: column;
+  padding: 20px 50px 30px;
+}
+
+.signin__container > h1 {
+  color: #1b2431;
+  font-weight: 400;
+  margin-bottom: 40px;
+  text-align: center;
+}
+.signin__form__group {
+  position: relative;
+}
+.signin__form__group > h5 {
+  font-weight: 400;
+  margin-bottom: 5px;
+  /* font-weight: 200; */
+  color: #1b2431;
+}
+.signin__form__group > span {
+  position: absolute;
+  right: 10px;
+  bottom: 0;
+  color: #c42012;
+  font-size: 0.8rem;
+}
+
+.signin__container__form__input {
+  height: 30px;
+  margin-bottom: 20px;
+  width: 98%;
+  border: none;
+  outline: none;
+}
+.valid__input {
+  border-bottom: 1px solid #1b2431;
+  background-color: white;
+}
+
+.signin__container > p {
+  margin-top: 25px;
+  font-size: 12px;
+  text-align: center;
+}
+
+.signin__signInButton {
+  background: #c42012;
+  width: 100%;
+  height: 40px;
+  font-size: 0.9rem;
+  border: none;
+  margin-top: 40px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+
+/* Spinner */
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(359deg);
+  }
+}
+
+@media (min-width: 480px) {
+  .signin__container {
+    width: 400px;
+    padding: 30px 50px;
+  }
+}
+
+@media (min-width: 768px) {
+  .signin {
+    /* background-color: blue; */
+  }
+}
+
+@media (min-width: 1024px) {
+  .signin {
+  }
+}
+
+@media (min-width: 1280px) {
+  .signin {
+  }
+}
