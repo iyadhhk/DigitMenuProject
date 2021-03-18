@@ -1,19 +1,27 @@
 .worker {
-  /* border: 2px solid green; */
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
-  padding-top: 60px;
+  padding-top: 70px;
 }
 .worker > h2 {
   font-weight: 400;
 }
 .butt-pay {
-  color: #c42012;
+  background-color: #c42012;
+  border: none;
+  outline: none;
+  padding: 10px;
+  color: white;
+  cursor: pointer;
+  margin-top: 10px;
 }
 
 .worker__tables {
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  padding: 10px;
+  background-color: white;
   margin: 20px 0;
   display: flex;
   justify-content: space-between;
@@ -21,13 +29,16 @@
   min-width: 300px;
 }
 .worker__tables > p {
-  font-size: 1.1rem;
+  font-size: 0.9rem;
 }
 .worker__tables > select {
-  padding: 10px 20px;
+  padding: 10px 5px;
+  margin-left: 20px;
   outline: none;
   border: none;
-  border-bottom: 1px solid #c42012;
+  border: 1px solid var(--light-color);
+  background-color: #fff;
+  color: var(--primary-color);
 }
 
 .worker__orders {
@@ -62,7 +73,8 @@
 }
 
 .req__dmd {
-  color: red;
+  color: var(--primary-color);
+  text-transform: lowercase;
 }
 
 .button__req__valid {
@@ -100,6 +112,7 @@
 }
 .worker__orders__items p {
   font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .butt__response {
@@ -137,6 +150,10 @@
 @media (min-width: 480px) {
   .worker__orders {
     min-width: 400px;
+  }
+  .worker__tables {
+    width: 400px;
+    padding: 10px 20px;
   }
 }
 

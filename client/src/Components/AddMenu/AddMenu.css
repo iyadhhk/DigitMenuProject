@@ -53,7 +53,7 @@
   width: 98%;
   border: none;
   outline: none;
-  border-bottom: 1px solid #1b2431;
+  border-bottom: 1px solid var(--light-color);
   background-color: white;
 }
 .menu__form__group-select {

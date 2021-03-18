@@ -27,7 +27,7 @@ router.post(
         error.data = errors.array();
         throw error;
       }
-      const { username, password, restaurantId } = req.body;
+      const { username, password, role, restaurantId } = req.body;
       const existedUser = await User.findOne({ username });
       if (existedUser) {
         const error = new Error('username already exists');
@@ -40,7 +40,7 @@ router.post(
       const user = new User({
         username,
         password: hashedPassword,
-        role: ROLE.WORKER,
+        role,
         restaurantId,
       });
       const createdUser = await user.save();
@@ -64,7 +64,10 @@ router.post(
 router.get('/workers/:restID', isAuth, authRole(ROLE.OWNER), async (req, res, next) => {
   try {
     const { restID } = req.params;
-    const workers = await User.find({ role: 'worker', restaurantId: restID });
+    const workers = await User.find({
+      role: ['kitchen', 'server'],
+      restaurantId: restID,
+    });
 
     res.status(200).json(workers);
   } catch (err) {

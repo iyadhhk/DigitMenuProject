@@ -1,6 +1,5 @@
 .add-worker {
   width: 300px;
-
   display: flex;
   flex-direction: column;
   /* border: 1px solid orange; */
@@ -39,7 +38,7 @@
   margin-bottom: 20px;
   width: 98%;
   border: none;
-  border-bottom: 1px solid #1b2431;
+  border-bottom: 1px solid var(--light-color);
   outline: none;
 }
 
@@ -61,7 +60,17 @@
   cursor: pointer;
   text-transform: uppercase;
 }
-
+.add-worker__form__group__radio {
+  display: inline-block;
+  font-size: 0.9rem;
+  margin: 0 5px;
+}
+.second-radio-input {
+  margin-left: 20px;
+}
+.radio-inputs {
+  margin-top: 20px;
+}
 @media (min-width: 480px) {
   .add-worker {
     /* background-color: green; */

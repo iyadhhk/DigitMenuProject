@@ -9,8 +9,10 @@ a {
 }
 :root {
   --bg-light: #f8f8f8;
+  /* --bg-light: #999999; */
   --primary-color: #c42012;
   --secondary-color: #020a15;
+  --light-color: lightgray;
 }
 html,
 body {

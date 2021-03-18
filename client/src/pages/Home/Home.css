@@ -5,6 +5,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #fff;
 }
 
 .home__content__left {
@@ -49,7 +50,7 @@
 
 .home__content {
   box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.514), 0 0px 20px 0 rgba(0, 0, 0, 0.548);
-  background: url("./medium-bg.jpg");
+  background: url('./medium-bg.jpg');
   background-size: cover;
   background-position: right;
   background-repeat: no-repeat;
@@ -216,6 +217,7 @@
   align-items: center;
   height: 750px;
   width: 100%;
+  z-index: 1;
 }
 .footer__content {
   position: absolute;
@@ -295,7 +297,7 @@
 }
 .slider::before,
 .slider::after {
-  content: "";
+  content: '';
   height: 100px;
   position: absolute;
   width: 100%;
@@ -326,7 +328,7 @@
 @media (min-width: 480px) {
   .home__content {
     margin-top: 100px;
-    background: url("./medium-bg.jpg");
+    background: url('./medium-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -359,7 +361,7 @@
 
 @media (min-width: 768px) {
   .home__content {
-    background: url("./mlarge-bg.jpg");
+    background: url('./mlarge-bg.jpg');
     background-size: cover;
     background-position: right;
     background-repeat: no-repeat;
@@ -404,7 +406,7 @@
 
 @media (min-width: 1024px) {
   .home__content {
-    background: url("./large-bg.jpg");
+    background: url('./large-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -426,7 +428,7 @@
 
 @media (min-width: 1280px) {
   .home__content {
-    background: url("./xlarge-bg.jpg");
+    background: url('./xlarge-bg.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;

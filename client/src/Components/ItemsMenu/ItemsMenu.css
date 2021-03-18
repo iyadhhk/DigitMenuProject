@@ -34,7 +34,7 @@
 }
 .menu-item__edit-group input {
   border: none;
-  border-bottom: 1px solid var(--secondary-color);
+  border-bottom: 1px solid var(--light-color);
   margin: 10px;
   font-size: 0.9rem;
   height: 30px;

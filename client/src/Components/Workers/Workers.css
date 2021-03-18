@@ -15,32 +15,31 @@
 }
 .workerlist__item {
   width: 300px;
-
-  border-bottom: 1px solid #1b24318c;
+  border-bottom: 1px solid var(--light-color);
   padding-bottom: 5px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 15px;
-  margin: 0 20px 15px;
+  margin-bottom: 25px;
 }
 .workerlist__item__info {
   display: flex;
+  align-items: center;
 }
-.workerlist__item__info > h4 {
+.workerlist__item__info > h5 {
   color: #1b2431;
   font-weight: 400;
 }
 .workerlist__item__info > span {
   margin-left: 10px;
-  text-transform: capitalize;
-  font-size: 1.1rem;
+  font-size: 0.9rem;
   font-weight: 500;
 }
 .worker__btn {
+  font-size: 0.7rem;
   border: none;
   outline: none;
-  padding: 10px 20px;
+  padding: 5px 15px;
   background-color: #c42012;
   color: white;
   cursor: pointer;

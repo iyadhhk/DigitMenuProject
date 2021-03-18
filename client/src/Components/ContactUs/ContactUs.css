@@ -27,13 +27,13 @@
   width: 98%;
   border: none;
   outline: none;
-  border-bottom: 1px solid #1b2431;
+  border-bottom: 1px solid var(--light-color);
   background-color: white;
 }
 .contact__Form textarea {
   outline: none;
   padding: 5px;
-  border-color: lightgray;
+  border-color: var(--light-color);
 }
 .contact__Form span {
   font-size: 0.7rem;

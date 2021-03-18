@@ -76,9 +76,59 @@ const WorkerSection = () => {
   const handleRefuse = (itemId, orderId) => {
     dispatch(refuseCancelOrder({ itemId, orderId }));
   };
+  const requestsInfo = (order, item) =>
+    user.role === 'kitchen' && (
+      <div className='req__info'>
+        {!item.confirmed && (
+          <Fragment>
+            <p className='req__dmd'>
+              demande
+              {order.preOrder.filter((el) => el.itemId === item._id)[0]
+                .requestedAction === 'cancel' ? (
+                <span> d'annulation </span>
+              ) : (
+                <p>
+                  de modification du quantité
+                  <span>
+                    (nouvelle quantité :
+                    {order.preOrder.length > 0 &&
+                      order.preOrder.filter((el) => el.itemId === item._id)[0]
+                        .newQuantity}
+                    )
+                  </span>
+                </p>
+              )}
+            </p>
+            <div className='butt__response'>
+              {order.preOrder.filter((el) => el.itemId === item._id)[0]
+                .requestedAction === 'cancel' && (
+                <button
+                  className='button__req__valid'
+                  onClick={() => handleConfirm(item._id, order._id)}>
+                  valider
+                </button>
+              )}
+              <button
+                className='button__req__reject'
+                onClick={() => handleRefuse(item._id, order._id)}>
+                refuser
+              </button>
+              {order.preOrder.filter((el) => el.itemId === item._id)[0]
+                .requestedAction === 'edit' && (
+                <button
+                  className='button__req__valid'
+                  onClick={() => handleConfirmEdit(item._id, order._id)}>
+                  confirmer
+                </button>
+              )}
+            </div>
+          </Fragment>
+        )}
+      </div>
+    );
   return (
     <div className='worker'>
-      <h2>List of orders</h2>
+      <h2>Liste des commandes</h2>
       <div className='worker__tables'>
         <p> Selectionnez une table </p>
         {tableStatus.getAll === 'loading' ? (
@@ -96,7 +146,7 @@ const WorkerSection = () => {
                 </option>
               ))
             ) : (
-              <option>aucune table trouvé</option>
+              <option>pas de table</option>
             )}
           </select>
         ) : (
@@ -134,59 +184,7 @@ const WorkerSection = () => {
                               (el) => el.itemId === item._id
                             )[0].newQuantity && ( */}
                           </div>
-                          <div className='req__info'>
-                            {!item.confirmed && (
-                              <Fragment>
-                                <p className='req__dmd'>
-                                  demande
-                                  {order.preOrder.filter(
-                                    (el) => el.itemId === item._id
-                                  )[0].requestedAction === 'cancel' ? (
-                                    <span> d'annulation </span>
-                                  ) : (
-                                    <p>
-                                      de modification du quantité
-                                      <span>
-                                        (nouvelle quantité :
-                                        {order.preOrder.length > 0 &&
-                                          order.preOrder.filter(
-                                            (el) => el.itemId === item._id
-                                          )[0].newQuantity}
-                                        )
-                                      </span>
-                                    </p>
-                                  )}
-                                </p>
-                                <div className='butt__response'>
-                                  {order.preOrder.filter(
-                                    (el) => el.itemId === item._id
-                                  )[0].requestedAction === 'cancel' && (
-                                    <button
-                                      className='button__req__valid'
-                                      onClick={() => handleConfirm(item._id, order._id)}>
-                                      valider
-                                    </button>
-                                  )}
-                                  <button
-                                    className='button__req__reject'
-                                    onClick={() => handleRefuse(item._id, order._id)}>
-                                    refuser
-                                  </button>
-                                  {order.preOrder.filter(
-                                    (el) => el.itemId === item._id
-                                  )[0].requestedAction === 'edit' && (
-                                    <button
-                                      className='button__req__valid'
-                                      onClick={() =>
-                                        handleConfirmEdit(item._id, order._id)
-                                      }>
-                                      confirmer
-                                    </button>
-                                  )}
-                                </div>
-                              </Fragment>
-                            )}
-                          </div>
+                          {requestsInfo(order, item)}
                           {item.comment && (
                             <p className='comment'>
                               <span>preferences: </span>
@@ -201,9 +199,11 @@ const WorkerSection = () => {
                       </div>
                     ))}
                   <p>Total : {order.total}</p>
-                  <button className='butt-pay' onClick={() => handleClick(order._id)}>
-                    Confirmer le paiement
-                  </button>
+                  {user.role === 'server' && (
+                    <button className='butt-pay' onClick={() => handleClick(order._id)}>
+                      Confirmer le paiement
+                    </button>
+                  )}
                 </div>
               );
             })

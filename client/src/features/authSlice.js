@@ -1,55 +1,52 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const authClient = createAsyncThunk(
-  "auth/auth-client",
+  'auth/auth-client',
   async (data, { rejectWithValue }) => {
     try {
       const { restId, tableNumber, history } = data;
-      console.log("restid", restId);
-      console.log("restid", tableNumber);
-      console.log("history", history);
-      const response = await axios.post("/auth/auth-client", {
+      console.log('restid', restId);
+      console.log('restid', tableNumber);
+      console.log('history', history);
+      const response = await axios.post('/auth/auth-client', {
         restId,
         tableNumber,
       });
-      localStorage.setItem("restId", restId);
-      localStorage.setItem("tableNumber", tableNumber);
-      history.push("/client-page");
+      localStorage.setItem('restId', restId);
+      localStorage.setItem('tableNumber', tableNumber);
+      history.push('/client-page');
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
     }
   }
 );
-export const login = createAsyncThunk(
-  "auth/login",
-  async (data, { rejectWithValue }) => {
-    try {
-      const response = await axios.post("/auth/login", data);
-      if (response.data.role === "admin") {
-        data.history.push("/admin-section");
-      } else if (response.data.role === "owner") {
-        data.history.push("/owner-section");
-      } else if (response.data.role === "worker") {
-        data.history.push("/worker-section");
-      } else {
-        data.history.push("/");
-      }
-      return response.data;
-    } catch (err) {
-      return rejectWithValue(err.response.data);
+export const login = createAsyncThunk('auth/login', async (data, { rejectWithValue }) => {
+  try {
+    const response = await axios.post('/auth/login', data);
+    if (response.data.role === 'admin') {
+      data.history.push('/admin-section');
+    } else if (response.data.role === 'owner') {
+      data.history.push('/owner-section');
+    } else if (response.data.role === 'kitchen' || response.data.role === 'server') {
+      data.history.push('/worker-section');
+    } else {
+      data.history.push('/');
     }
+    return response.data;
+  } catch (err) {
+    return rejectWithValue(err.response.data);
   }
-);
+});
 
 export const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: {
-    token: localStorage.getItem("token"),
+    token: localStorage.getItem('token'),
     isAuthenticated: false,
     isClient: false,
-    authStatus: { authClient: "idle", authUser: "idle" },
+    authStatus: { authClient: 'idle', authUser: 'idle' },
     authErrors: { authClient: null, authUser: null },
     user: null,
   },
@@ -58,17 +55,17 @@ export const authSlice = createSlice({
       return { ...state, isClient: false };
     },
     logout(state) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       return { ...state, token: null, isAuthenticated: false, user: null };
     },
     initState(state) {
-      localStorage.removeItem("token");
+      localStorage.removeItem('token');
       return {
         ...state,
         token: null,
         isAuthenticated: false,
         isClient: false,
-        authStatus: { authClient: "idle", authUser: "idle" },
+        authStatus: { authClient: 'idle', authUser: 'idle' },
         authErrors: { authClient: null, authUser: null },
         user: null,
       };
@@ -78,14 +75,14 @@ export const authSlice = createSlice({
     [login.pending]: (state, action) => {
       return {
         ...state,
-        authStatus: { ...state.authStatus, authUser: "loading" },
+        authStatus: { ...state.authStatus, authUser: 'loading' },
       };
     },
     [login.fulfilled]: (state, action) => {
-      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
-        authStatus: { ...state.authStatus, authUser: "succeded" },
+        authStatus: { ...state.authStatus, authUser: 'succeded' },
         authErrors: { ...state.authErrors, authUser: null },
 
         isAuthenticated: true,
@@ -95,29 +92,29 @@ export const authSlice = createSlice({
     [login.rejected]: (state, action) => {
       return {
         ...state,
-        authStatus: { ...state.authStatus, authUser: "failed" },
+        authStatus: { ...state.authStatus, authUser: 'failed' },
         authErrors: { ...state.authErrors, authUser: action.payload },
       };
     },
     [authClient.pending]: (state, action) => {
       return {
         ...state,
-        authStatus: { ...state.authStatus, authClient: "loading" },
+        authStatus: { ...state.authStatus, authClient: 'loading' },
       };
     },
     [authClient.fulfilled]: (state, action) => {
-      localStorage.setItem("token", action.payload.token);
+      localStorage.setItem('token', action.payload.token);
       return {
         ...state,
 
-        authStatus: { ...state.authStatus, authClient: "succeded" },
+        authStatus: { ...state.authStatus, authClient: 'succeded' },
         authErrors: { ...state.authErrors, authClient: action.payload },
         isClient: true,
       };
     },
     [authClient.rejected]: (state, action) => ({
       ...state,
-      authStatus: { ...state.authStatus, authClient: "failed" },
+      authStatus: { ...state.authStatus, authClient: 'failed' },
       authErrors: { ...state.authErrors, authClient: action.payload },
     }),
   },
