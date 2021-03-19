@@ -40,7 +40,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 150px;
+  /* width: 150px; */
 }
 .navbar__link {
   text-transform: uppercase;
@@ -71,6 +71,9 @@
 .mobile-menu {
   display: block;
   transition: 0.5s;
+}
+.mobile-menu-hide {
+  display: none;
 }
 .menu-icon {
   color: white;

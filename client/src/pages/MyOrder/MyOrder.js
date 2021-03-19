@@ -1,18 +1,14 @@
-import React, { useState, useEffect, Fragment } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useLocation, Link, useHistory } from "react-router-dom";
-import { IconContext } from "react-icons";
-import { RiDeleteBin5Fill } from "react-icons/ri";
-import { CgEditExposure } from "react-icons/cg";
-import { ImSpinner9 } from "react-icons/im";
-import { HiOutlineMinusCircle, HiOutlinePlusCircle } from "react-icons/hi";
+import React, { useState, useEffect, Fragment } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { useLocation, Link, useHistory } from 'react-router-dom';
+import { IconContext } from 'react-icons';
+import { RiDeleteBin5Fill } from 'react-icons/ri';
+import { CgEditExposure } from 'react-icons/cg';
+import { ImSpinner9 } from 'react-icons/im';
+import { HiOutlineMinusCircle, HiOutlinePlusCircle } from 'react-icons/hi';
 
-import {
-  getOrderById,
-  cancelOrder,
-  editPreOrder,
-} from "../../features/orderSlice";
-import "./MyOrder.css";
+import { getOrderById, cancelOrder, editPreOrder } from '../../features/orderSlice';
+import './MyOrder.css';
 
 const MyOrder = ({ channel }) => {
   const [editFields, setEditFields] = useState({
@@ -30,19 +26,18 @@ const MyOrder = ({ channel }) => {
   }, [orderId]);
   useEffect(() => {
     if (channel) {
-      channel.on("message", (data) => {
+      channel.on('message', (data) => {
         dispatch(getOrderById(orderId));
       });
-      channel.on("checkout", (data) => {
-        history.push("/client-page");
+      channel.on('checkout', (data) => {
+        history.push('/client-page');
       });
     }
   }, [channel]);
 
   const { order, orderStatus } = useSelector((state) => state.order);
   useEffect(() => {
-    order.order.items &&
-      setEditFields({ ...editFields, editOrder: order.order.items });
+    order.order.items && setEditFields({ ...editFields, editOrder: order.order.items });
   }, [order]);
   const handleCancel = (itemId) => {
     dispatch(cancelOrder({ itemId, orderId }));
@@ -54,13 +49,11 @@ const MyOrder = ({ channel }) => {
       const newValues = {
         newQuantity: itemToEdit.quantity,
         newPrice: itemToEdit.price,
-        newComment: "",
+        newComment: '',
       };
 
       if (Number(oldQuantity) !== Number(itemToEdit.quantity)) {
-        dispatch(
-          editPreOrder({ itemId: editStatus.itemId, orderId, newValues })
-        );
+        dispatch(editPreOrder({ itemId: editStatus.itemId, orderId, newValues }));
       }
       setEditFields({
         ...editFields,
@@ -103,14 +96,11 @@ const MyOrder = ({ channel }) => {
 
   const requestResult = (item) => {
     const preOrder = order.order.preOrder;
-    if (
-      preOrder.length > 0 &&
-      preOrder.filter((order) => order.itemId === item._id)[0]
-    ) {
+    if (preOrder.length > 0 && preOrder.filter((order) => order.itemId === item._id)[0]) {
       if (item.confirmed) {
         if (preOrder.filter((order) => order.itemId === item._id)[0].confirmed)
           return (
-            <p className="request__msg--valid">
+            <p className='request__msg--valid'>
               {/* {
                 preOrder.filter((order) => order.itemId === item._id)[0]
                   .requestedAction
@@ -120,7 +110,7 @@ const MyOrder = ({ channel }) => {
           );
         else
           return (
-            <p className="request__msg--rejected">
+            <p className='request__msg--rejected'>
               {/* {
                 preOrder.filter((order) => order.itemId === item._id)[0]
                   .requestedAction
@@ -129,111 +119,62 @@ const MyOrder = ({ channel }) => {
             </p>
           );
       } else {
-        return (
-          <p className="request__msg--waiting">
-            en attente de
-            {/* {preOrder.length > 0 &&
-              preOrder.filter((order) => order.itemId === item._id)[0]
-                .requestedAction} */}
-            confirmation
-          </p>
+        orderStatus.cancel === 'rejected' || orderStatus.editPreOrder === 'rejected' ? (
+          <p className='request__msg--rejected'>Demande rejetée</p>
+        ) : (
+          <p className='request__msg--waiting'>en attente de confirmation </p>
         );
       }
     }
   };
 
   return (
-    <div className="order">
+    <div className='order'>
       <h2>A Payer</h2>
-      {orderStatus.getOne === "loading" ? (
-        <IconContext.Provider value={{ className: "spinner--large" }}>
+      {orderStatus.getOne === 'loading' ? (
+        <IconContext.Provider value={{ className: 'spinner--large' }}>
           <div>
             <ImSpinner9 />
           </div>
         </IconContext.Provider>
-      ) : orderStatus.getOne === "succeded" ? (
+      ) : orderStatus.getOne === 'succeded' ? (
         editOrder &&
         editOrder.length > 0 &&
         editOrder.map((item) => (
-          <div className="order__item" key={item._id}>
-            <div className="order__item__head">
+          <div className='order__item' key={item._id}>
+            <div className='order__item__head'>
               <p>{item.name}</p>
-              <div className="order__item__info">
+              <div className='order__item__info'>
                 <p>{item.quantity}</p>
                 <p>{item.price} DT</p>
               </div>
             </div>
-            <div className="order__item__foot">
-              <span className="order__item__foot__result">
-                {requestResult(item)}
-              </span>
-              <div>
+            <div className='order__item__foot'>
+              <span className='order__item__foot__result'>{requestResult(item)}</span>
+              <div className='req-buttons'>
                 {editStatus.toEdit && item._id === editStatus.itemId && (
                   <Fragment>
                     <button
-                      className="order__req__but"
-                      onClick={() => handleAdd(item._id)}
-                    >
-                      <span>
-                        <IconContext.Provider
-                          value={{
-                            className: "order-icon--valid",
-                          }}
-                        >
-                          <HiOutlinePlusCircle />
-                        </IconContext.Provider>
-                      </span>
+                      className='order__req__but-quantity'
+                      onClick={() => handleAdd(item._id)}>
+                      + 1
                     </button>
                     <button
-                      className="order__req__but"
-                      onClick={() => handleRemove(item._id)}
-                    >
-                      <span>
-                        <div>
-                          <IconContext.Provider
-                            value={{
-                              className: "order-icon--delete",
-                            }}
-                          >
-                            <HiOutlineMinusCircle />
-                          </IconContext.Provider>
-                        </div>
-                      </span>
+                      className='order__req__but-quantity'
+                      onClick={() => handleRemove(item._id)}>
+                      - 1
                     </button>
                   </Fragment>
                 )}
-
                 <button
-                  className="order__req__but"
-                  onClick={() => handleCancel(item._id)}
-                >
-                  <span>
-                    <div>
-                      <IconContext.Provider
-                        value={{
-                          className: "order-icon--delete",
-                        }}
-                      >
-                        <RiDeleteBin5Fill />
-                      </IconContext.Provider>
-                    </div>
-                  </span>
+                  className='order__req__but order__req__but--green'
+                  onClick={() => handleEdit(item)}>
+                  modifier
                 </button>
                 <button
-                  className="order__req__but"
-                  onClick={() => handleEdit(item)}
-                >
-                  <span>
-                    <div>
-                      <IconContext.Provider
-                        value={{
-                          className: "order-icon--valid",
-                        }}
-                      >
-                        <CgEditExposure />
-                      </IconContext.Provider>
-                    </div>
-                  </span>
+                  className='order__req__but order__req__but--red'
+                  onClick={() => handleCancel(item._id)}>
+                  annuler
                 </button>
               </div>
             </div>
@@ -242,20 +183,20 @@ const MyOrder = ({ channel }) => {
       ) : (
         <h5>un probléme est survenu..</h5>
       )}
-      <div className="order__item__total">
+      <div className='order__item__total'>
         <p>total</p>
         <p>
-          {orderStatus.getOne === "loading" ? (
+          {orderStatus.getOne === 'loading' ? (
             <span>loading..</span>
-          ) : orderStatus.getOne === "succeded" ? (
+          ) : orderStatus.getOne === 'succeded' ? (
             order && order.order.total
           ) : null}
-          DT
+          <span> DT</span>
         </p>
       </div>
-      <div className="client-menu__nav">
-        <Link to="/client-page">
-          <button className="client-menu__nav__back">retour au menu </button>
+      <div className='client-menu__nav'>
+        <Link to='/client-page'>
+          <button className='client-menu__nav__back'>retour au menu </button>
         </Link>
       </div>
     </div>

@@ -99,6 +99,7 @@
   margin: 5px;
   outline: none;
   padding: 5px;
+  border: 1px solid var(--light-color);
 }
 .comment__button {
   background-color: rgb(219, 219, 219);

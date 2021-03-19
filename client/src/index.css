@@ -13,6 +13,7 @@ a {
   --primary-color: #c42012;
   --secondary-color: #020a15;
   --light-color: lightgray;
+  --valid-color: #48b9a0;
 }
 html,
 body {

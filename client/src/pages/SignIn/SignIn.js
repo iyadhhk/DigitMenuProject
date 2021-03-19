@@ -29,10 +29,10 @@ const SignIn = () => {
   return (
     <div className='signin'>
       <div className='signin__container'>
-        <h1>Sign In</h1>
+        <h1>Se connecter</h1>
         <form>
           <div className='signin__form__group'>
-            <h5>Username</h5>
+            <h5>Nom d'utilisateur</h5>
             <span>
               {authStatus.authUser === 'failed' &&
                 authErrors.authUser &&
@@ -48,7 +48,7 @@ const SignIn = () => {
             />
           </div>
           <div className='signin__form__group'>
-            <h5>Password</h5>
+            <h5>Mot de passe</h5>
             <span>
               {authStatus.authUser === 'failed' &&
                 authErrors.authUser &&
@@ -72,7 +72,7 @@ const SignIn = () => {
                 </div>
               </IconContext.Provider>
             ) : (
-              <span>Sign In</span>
+              <span>connexion</span>
             )}
           </button>
         </form>

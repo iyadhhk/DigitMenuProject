@@ -49,6 +49,7 @@
   margin: 10px;
   display: flex;
   flex-direction: column;
+  background-color: white;
 }
 /* .worker__orders button {
   background: #c42012;
@@ -62,31 +63,38 @@
 } */
 .button__req__reject {
   color: white;
-  background-color: red;
-  border-radius: 5px;
-  height: 40px;
-  width: 80px;
-  margin-left: 30px;
+  background-color: var(--primary-color);
+  padding: 10px 20px;
+  /* border-radius: 5px; */
   font-size: 0.9rem;
   border: none;
   cursor: pointer;
+  outline: none;
+}
+.req__info__block {
+  display: flex;
+  /* border: 1px solid red; */
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 }
 
 .req__dmd {
   color: var(--primary-color);
   text-transform: lowercase;
+  flex: 1;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
 .button__req__valid {
-  color: red;
-  background-color: white;
-  border-color: red;
-  border-radius: 5px;
-  height: 40px;
-  width: 80px;
-  margin-left: 30px;
+  color: white;
+  background-color: var(--valid-color);
   font-size: 0.9rem;
   cursor: pointer;
+  padding: 0 15px;
+  outline: none;
+  border: none;
 }
 
 .req__info {
@@ -95,18 +103,11 @@
   margin-bottom: 20px;
 }
 
-.req__info__msg {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  background-color: indianred;
-}
 .worker__orders__items {
   display: flex;
   flex-direction: column;
   border-bottom: 1px solid #48b9a0;
-  /* background-color: green; */
+
   margin-bottom: 20px;
   padding: 10px;
 }
@@ -117,10 +118,10 @@
 
 .butt__response {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 250px;
-  height: 90px;
+
+  justify-content: space-evenly;
+  width: 100%;
+  /* flex: 1; */
 }
 .timeline {
   margin-top: 10px;
@@ -130,12 +131,10 @@
   color: #48b9a0;
 }
 .comment {
-  margin-top: 10px;
   text-transform: lowercase;
-  align-self: flex-start;
   font-size: small;
-  color: var(--primary-color);
-  display: none;
+  color: var(--secondary-color);
+  text-align: center;
 }
 .comment > span {
   text-transform: uppercase;
@@ -155,6 +154,12 @@
     width: 400px;
     padding: 10px 20px;
   }
+  .butt__response {
+    justify-content: space-evenly;
+  }
+  .req__dmd {
+    flex: 2;
+  }
 }
 
 @media (min-width: 768px) {
@@ -163,13 +168,6 @@
   }
   .comment {
     display: block;
-  }
-
-  .butt__response {
-    flex-direction: row;
-  }
-
-  .req__dmd {
   }
 }
 

@@ -80,7 +80,7 @@ const WorkerSection = () => {
     user.role === 'kitchen' && (
       <div className='req__info'>
         {!item.confirmed && (
-          <Fragment>
+          <div className='req__info__block'>
             <p className='req__dmd'>
               demande
               {order.preOrder.filter((el) => el.itemId === item._id)[0]
@@ -108,11 +108,7 @@ const WorkerSection = () => {
                   valider
                 </button>
               )}
-              <button
-                className='button__req__reject'
-                onClick={() => handleRefuse(item._id, order._id)}>
-                refuser
-              </button>
+
               {order.preOrder.filter((el) => el.itemId === item._id)[0]
                 .requestedAction === 'edit' && (
                 <button
@@ -121,8 +117,13 @@ const WorkerSection = () => {
                   confirmer
                 </button>
               )}
+              <button
+                className='button__req__reject'
+                onClick={() => handleRefuse(item._id, order._id)}>
+                refuser
+              </button>
             </div>
-          </Fragment>
+          </div>
         )}
       </div>
     );
@@ -185,7 +186,7 @@ const WorkerSection = () => {
                             )[0].newQuantity && ( */}
                           </div>
                           {requestsInfo(order, item)}
-                          {item.comment && (
+                          {user.role === 'kitchen' && item.comment && (
                             <p className='comment'>
                               <span>preferences: </span>
                               {item.comment}
@@ -199,7 +200,7 @@ const WorkerSection = () => {
                       </div>
                     ))}
                   <p>Total : {order.total}</p>
-                  {user.role === 'server' && (
+                  {user.role === 'server' && Number(order.total) > 0 && (
                     <button className='butt-pay' onClick={() => handleClick(order._id)}>
                       Confirmer le paiement
                     </button>

@@ -1,12 +1,12 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import axios from 'axios';
 
 export const createOrder = createAsyncThunk(
-  "order/create-order",
+  'order/create-order',
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.post("/order/create-order", formData.data);
-      formData.history.push("/");
+      const response = await axios.post('/order/create-order', formData.data);
+      formData.history.push('/');
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -14,11 +14,11 @@ export const createOrder = createAsyncThunk(
   }
 );
 export const updateOrder = createAsyncThunk(
-  "order/update-order",
+  'order/update-order',
   async (formData, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/update-order", formData.data);
-      formData.history.push("/");
+      const response = await axios.put('/order/update-order', formData.data);
+      formData.history.push('/');
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -26,7 +26,7 @@ export const updateOrder = createAsyncThunk(
   }
 );
 export const getOrderById = createAsyncThunk(
-  "order/getById",
+  'order/getById',
   async (id, { rejectWithValue }) => {
     try {
       const response = await axios.get(`/order/get-client-order/${id}`);
@@ -38,7 +38,7 @@ export const getOrderById = createAsyncThunk(
   }
 );
 export const getAllOrders = createAsyncThunk(
-  "order/getAll",
+  'order/getAll',
   async (restId, { rejectWithValue }) => {
     try {
       const response = await axios.get(`/order/get-order/${restId}`);
@@ -50,10 +50,10 @@ export const getAllOrders = createAsyncThunk(
   }
 );
 export const checkoutOrder = createAsyncThunk(
-  "order/checkout-order",
+  'order/checkout-order',
   async (orderId, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/checkout-order", orderId);
+      const response = await axios.put('/order/checkout-order', orderId);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -61,10 +61,10 @@ export const checkoutOrder = createAsyncThunk(
   }
 );
 export const cancelOrder = createAsyncThunk(
-  "order/cancel-order",
+  'order/cancel-order',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/cancel-order", data);
+      const response = await axios.put('/order/cancel-order', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -72,10 +72,10 @@ export const cancelOrder = createAsyncThunk(
   }
 );
 export const confirmCancelOrder = createAsyncThunk(
-  "order/confirm-cancel",
+  'order/confirm-cancel',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/confirm-cancel", data);
+      const response = await axios.put('/order/confirm-cancel', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -83,10 +83,10 @@ export const confirmCancelOrder = createAsyncThunk(
   }
 );
 export const refuseCancelOrder = createAsyncThunk(
-  "order/refuse-cancel",
+  'order/refuse-cancel',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/refuse-cancel", data);
+      const response = await axios.put('/order/refuse-cancel', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -94,10 +94,10 @@ export const refuseCancelOrder = createAsyncThunk(
   }
 );
 export const editPreOrder = createAsyncThunk(
-  "order/edit-preorder",
+  'order/edit-preorder',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/edit-preorder", data);
+      const response = await axios.put('/order/edit-preorder', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -105,10 +105,10 @@ export const editPreOrder = createAsyncThunk(
   }
 );
 export const confirmEditPreOrder = createAsyncThunk(
-  "order/confirm-edit-preorder",
+  'order/confirm-edit-preorder',
   async (data, { rejectWithValue }) => {
     try {
-      const response = await axios.put("/order/confirm-edit-preorder", data);
+      const response = await axios.put('/order/confirm-edit-preorder', data);
       return response.data;
     } catch (err) {
       return rejectWithValue(err.response.data);
@@ -117,17 +117,21 @@ export const confirmEditPreOrder = createAsyncThunk(
 );
 
 export const orderSlice = createSlice({
-  name: "order",
+  name: 'order',
   initialState: {
     preOrder: [],
     order: null,
     orderStatus: {
-      create: "idle",
-      edit: "idle",
-      getOne: "idle",
-      getAll: "idle",
-      checkout: "idle",
-      cancel: "idle",
+      create: 'idle',
+      edit: 'idle',
+      getOne: 'idle',
+      getAll: 'idle',
+      checkout: 'idle',
+      cancel: 'idle',
+      confirmCancel: 'idle',
+      refuseCancel: 'idle',
+      editPreOrder: 'idle',
+      confirmEditPreOrder: 'idle',
     },
     orderErrors: {
       create: null,
@@ -136,6 +140,10 @@ export const orderSlice = createSlice({
       getAll: null,
       checkout: null,
       cancel: null,
+      confirmCancel: null,
+      refuseCancel: null,
+      editPreOrder: null,
+      confirmEditPreOrder: null,
     },
     orders: null,
   },
@@ -147,10 +155,7 @@ export const orderSlice = createSlice({
       if (itemIndex === -1) {
         return {
           ...state,
-          preOrder: [
-            ...state.preOrder,
-            { name, price, quantity: 1, createdAt },
-          ],
+          preOrder: [...state.preOrder, { name, price, quantity: 1, createdAt }],
         };
       } else {
         newList[itemIndex] = {
@@ -191,25 +196,25 @@ export const orderSlice = createSlice({
     [createOrder.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, create: "loading" },
+        orderStatus: { ...state.orderStatus, create: 'loading' },
       };
     },
     [createOrder.fulfilled]: (state, action) => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("restId");
-      localStorage.removeItem("tableNumber");
-      localStorage.setItem("id", action.payload.id);
+      localStorage.removeItem('token');
+      localStorage.removeItem('restId');
+      localStorage.removeItem('tableNumber');
+      localStorage.setItem('id', action.payload.id);
       return {
         ...state,
         order: action.payload,
-        orderStatus: { ...state.orderStatus, create: "succeded" },
+        orderStatus: { ...state.orderStatus, create: 'succeded' },
         orderErrors: { ...state.orderErrors, create: null },
       };
     },
     [createOrder.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, create: "failed" },
+        orderStatus: { ...state.orderStatus, create: 'failed' },
 
         orderErrors: { ...state.orderErrors, create: action.payload },
       };
@@ -217,87 +222,87 @@ export const orderSlice = createSlice({
     [updateOrder.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, edit: "loading" },
+        orderStatus: { ...state.orderStatus, edit: 'loading' },
       };
     },
     [updateOrder.fulfilled]: (state, action) => {
-      localStorage.removeItem("token");
-      localStorage.removeItem("restId");
-      localStorage.removeItem("tableNumber");
+      localStorage.removeItem('token');
+      localStorage.removeItem('restId');
+      localStorage.removeItem('tableNumber');
       return {
         ...state,
         order: action.payload,
-        orderStatus: { ...state.orderStatus, edit: "succeded" },
+        orderStatus: { ...state.orderStatus, edit: 'succeded' },
         orderErrors: { ...state.orderErrors, edit: null },
       };
     },
     [updateOrder.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, edit: "failed" },
+        orderStatus: { ...state.orderStatus, edit: 'failed' },
         orderErrors: { ...state.orderErrors, edit: action.payload },
       };
     },
     [getOrderById.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, getOne: "loading" },
+        orderStatus: { ...state.orderStatus, getOne: 'loading' },
       };
     },
     [getOrderById.fulfilled]: (state, action) => {
       return {
         ...state,
         order: action.payload,
-        orderStatus: { ...state.orderStatus, getOne: "succeded" },
+        orderStatus: { ...state.orderStatus, getOne: 'succeded' },
         orderErrors: { ...state.orderErrors, getOne: null },
       };
     },
     [getOrderById.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, getOne: "failed" },
+        orderStatus: { ...state.orderStatus, getOne: 'failed' },
         orderErrors: { ...state.orderErrors, getOne: action.payload },
       };
     },
     [getAllOrders.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, getAll: "loading" },
+        orderStatus: { ...state.orderStatus, getAll: 'loading' },
       };
     },
     [getAllOrders.fulfilled]: (state, action) => {
       return {
         ...state,
         orders: action.payload,
-        orderStatus: { ...state.orderStatus, getAll: "succeded" },
+        orderStatus: { ...state.orderStatus, getAll: 'succeded' },
         orderErrors: { ...state.orderErrors, getAll: null },
       };
     },
     [getAllOrders.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, getAll: "failed" },
+        orderStatus: { ...state.orderStatus, getAll: 'failed' },
         orderErrors: { ...state.orderErrors, getAll: action.payload },
       };
     },
     [checkoutOrder.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, checkout: "loading" },
+        orderStatus: { ...state.orderStatus, checkout: 'loading' },
       };
     },
     [checkoutOrder.fulfilled]: (state, action) => {
       return {
         ...state,
         order: action.payload,
-        orderStatus: { ...state.orderStatus, checkout: "succeded" },
+        orderStatus: { ...state.orderStatus, checkout: 'succeded' },
         orderErrors: { ...state.orderErrors, checkout: null },
       };
     },
     [checkoutOrder.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, checkout: "failed" },
+        orderStatus: { ...state.orderStatus, checkout: 'failed' },
         orderErrors: { ...state.orderErrors, checkout: action.payload },
       };
     },
@@ -305,22 +310,109 @@ export const orderSlice = createSlice({
     [cancelOrder.pending]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, cancel: "loading" },
+        orderStatus: { ...state.orderStatus, cancel: 'loading' },
       };
     },
     [cancelOrder.fulfilled]: (state, action) => {
       return {
         ...state,
         order: action.payload,
-        orderStatus: { ...state.orderStatus, cancel: "succeded" },
+        orderStatus: { ...state.orderStatus, cancel: 'succeded' },
         orderErrors: { ...state.orderErrors, cancel: null },
       };
     },
     [cancelOrder.rejected]: (state, action) => {
       return {
         ...state,
-        orderStatus: { ...state.orderStatus, cancel: "failed" },
+        orderStatus: { ...state.orderStatus, cancel: 'failed' },
         orderErrors: { ...state.orderErrors, cancel: action.payload },
+      };
+    },
+
+    [confirmCancelOrder.pending]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmCancel: 'loading' },
+      };
+    },
+    [confirmCancelOrder.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmCancel: 'succeded' },
+        orderErrors: { ...state.orderErrors, confirmCancel: null },
+      };
+    },
+    [confirmCancelOrder.rejected]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmCancel: 'failed' },
+        orderErrors: { ...state.orderErrors, confirmCancel: action.payload },
+      };
+    },
+
+    [refuseCancelOrder.pending]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, refuseCancel: 'loading' },
+      };
+    },
+    [refuseCancelOrder.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, refuseCancel: 'succeded' },
+        orderErrors: { ...state.orderErrors, refuseCancel: null },
+      };
+    },
+    [refuseCancelOrder.rejected]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, refuseCancel: 'failed' },
+        orderErrors: { ...state.orderErrors, refuseCancel: action.payload },
+      };
+    },
+
+    [editPreOrder.pending]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, editPreOrder: 'loading' },
+      };
+    },
+    [editPreOrder.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, editPreOrder: 'succeded' },
+        orderErrors: { ...state.orderErrors, editPreOrder: null },
+      };
+    },
+    [editPreOrder.rejected]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, editPreOrder: 'failed' },
+        orderErrors: { ...state.orderErrors, editPreOrder: action.payload },
+      };
+    },
+
+    [confirmEditPreOrder.pending]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmEditPreOrder: 'loading' },
+      };
+    },
+    [confirmEditPreOrder.fulfilled]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmEditPreOrder: 'succeded' },
+        orderErrors: { ...state.orderErrors, confirmEditPreOrder: null },
+      };
+    },
+    [confirmEditPreOrder.rejected]: (state, action) => {
+      return {
+        ...state,
+        orderStatus: { ...state.orderStatus, confirmEditPreOrder: 'failed' },
+        orderErrors: {
+          ...state.orderErrors,
+          confirmEditPreOrder: action.payload,
+        },
       };
     },
   },

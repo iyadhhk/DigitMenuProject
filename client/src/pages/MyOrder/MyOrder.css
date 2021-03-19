@@ -32,6 +32,7 @@
 .order__item__head > p {
   flex: 1;
   /* text-transform: capitalize; */
+  text-transform: uppercase;
 }
 
 .order__item__info {
@@ -46,18 +47,28 @@
 .order__item__foot {
   margin: 10px 0;
   display: flex;
+  flex-direction: column;
   width: 100%;
-  justify-content: space-between;
+  align-items: center;
 }
 
 .request__msg--valid {
-  color: green;
+  color: var(--valid-color);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .request__msg--rejected {
-  color: red;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .request__msg--waiting {
-  color: orange;
+  color: var(--primary-color);
+  font-size: 0.9rem;
+  margin-bottom: 20px;
+  text-transform: uppercase;
 }
 .order__item__total {
   padding: 10px;
@@ -79,18 +90,31 @@
   cursor: pointer;
   border-radius: 5px;
 }
-
+.req-buttons {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
 .order__req__but {
-  margin: 0 2px;
+  color: white;
+  outline: none;
   border: none;
+  padding: 10px 15px;
 }
-.order-icon--delete {
-  font-size: 1.2rem;
-  color: red;
+.order__req__but--red {
+  background-color: var(--primary-color);
 }
-.order-icon--valid {
-  font-size: 1.2rem;
-  color: green;
+.order__req__but--green {
+  background-color: var(--secondary-color);
+}
+.order__req__but-quantity {
+  padding: 10px 15px;
+  font-weight: 500;
+  border: none;
+  outline: none;
+
+  color: white;
+  background-color: var(--primary-color);
 }
 
 .order__item__foot__result {

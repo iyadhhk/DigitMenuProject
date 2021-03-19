@@ -102,7 +102,9 @@ const Navbar = () => {
         <Link to='/signin' onClick={closeMobileMenu}>
           <span className='navbar__link'>se connecter</span>
         </Link>
-        <div className='mobile-menu' onClick={handleClick}>
+        <div
+          className={location.pathname === '/' ? 'mobile-menu' : 'mobile-menu-hide'}
+          onClick={handleClick}>
           {click ? (
             <IconContext.Provider value={{ className: 'menu-icon' }}>
               <div>
