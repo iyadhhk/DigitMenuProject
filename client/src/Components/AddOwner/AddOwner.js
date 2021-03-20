@@ -27,10 +27,10 @@ const AddOwner = () => {
   };
   return (
     <div className='addowner'>
-      <h3>Create new Owner</h3>
+      <h3>Créer un nouveau client</h3>
       <form>
         <div className='addowner__form__group'>
-          <h5>Username</h5>
+          <h5>Nom d'utilisateur</h5>
 
           <span>
             {adminStatus.create === 'failed' &&
@@ -47,7 +47,7 @@ const AddOwner = () => {
           />
         </div>
         <div className='addowner__form__group'>
-          <h5>Password</h5>
+          <h5>Mot de passe</h5>
 
           <span>
             {adminStatus.create === 'failed' &&
@@ -71,7 +71,7 @@ const AddOwner = () => {
               </div>
             </IconContext.Provider>
           ) : (
-            <span>Add</span>
+            <span>AJOUTER</span>
           )}
         </button>
       </form>

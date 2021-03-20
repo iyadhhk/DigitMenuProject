@@ -3,7 +3,8 @@
   height: 400px;
   display: flex;
   flex-direction: column;
-  /* border: 1px solid orange; */
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+  background-color: white;
   padding: 40px;
 }
 
