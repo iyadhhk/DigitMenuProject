@@ -27,12 +27,12 @@ const ScanCode = () => {
     height: 220,
     width: 200,
   };
-  const handleInput = (e) => {
-    setValues({ ...values, code: e.target.value });
-  };
-  const handleSubmit = () => {
-    setValues({ ...values, result: code });
-  };
+  // const handleInput = (e) => {
+  //   setValues({ ...values, code: e.target.value });
+  // };
+  // const handleSubmit = () => {
+  //   setValues({ ...values, result: code });
+  // };
   useEffect(() => {
     if (result)
       dispatch(
@@ -57,7 +57,7 @@ const ScanCode = () => {
         </div>
       ) : (
         <Fragment>
-          {/* <div className='reader'>
+          <div className='reader'>
             <QrReader
               className='qr-reader'
               delay={delay}
@@ -65,8 +65,8 @@ const ScanCode = () => {
               onError={handleError}
               onScan={handleScan}
             />
-          </div> */}
-          <input
+          </div>
+          {/* <input
             size='50'
             className='test'
             type='text'
@@ -75,7 +75,7 @@ const ScanCode = () => {
             onChange={handleInput}
           />
           <button onClick={handleSubmit}>confirm</button>
-          <h1>{result}</h1>
+          <h1>{result}</h1> */}
         </Fragment>
       )}
     </div>

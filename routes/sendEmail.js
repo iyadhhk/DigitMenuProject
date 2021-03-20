@@ -1,20 +1,20 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
-const nodemailer = require("nodemailer");
-const { body, validationResult } = require("express-validator");
+const nodemailer = require('nodemailer');
+const { body, validationResult } = require('express-validator');
 
 router.post(
-  "/sendEmail",
+  '/sendEmail',
   [
-    body("username").trim().isLength({ min: 4 }),
-    body("email").trim().isEmail(),
-    body("message").trim().isLength({ min: 5 }),
+    body('username').trim().isLength({ min: 4 }),
+    body('email').trim().isEmail(),
+    body('message').trim().isLength({ min: 5 }),
   ],
   async (req, res, next) => {
     try {
       const errors = validationResult(req);
       if (!errors.isEmpty()) {
-        const error = new Error("Validation failed");
+        const error = new Error('Validation failed');
         error.statusCode = 422;
         error.data = errors.array();
         throw error;
@@ -26,29 +26,51 @@ router.post(
  </ul>
  <h3> message : <p>${req.body.message}</p> </h3> `;
 
+      // let transporter = nodemailer.createTransport({
+      //   host: 'smtp.gmail.com',
+      //   port: 465,
+      //   secure: true,
+      //   auth: {
+      //     user: 'digit.menu.plz@gmail.com',
+      //     pass: 'digit123menu',
+      //   },
+      // });
+
+      // let info = await transporter.sendMail({
+      //   from: '"client",  <digit.menu.plz@gmail.com>',
+      //   to: 'digit.menu.plz@gmail.com',
+      //   subject: 'new contact ',
+      //   html: output,
+      // });
+      //- new test version
       let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
+        service: 'gmail',
+        port: 587,
+        secure: false,
         auth: {
-          user: "digit.menu.plz@gmail.com",
-          pass: "digit123menu",
+          user: 'digit.menu.plz@gmail.com', // generated ethereal user
+          pass: 'digit123menu', // generated ethereal password
+        },
+        tls: {
+          rejectUnAuthorized: true,
         },
       });
 
       let info = await transporter.sendMail({
-        from: '"client",  <digit.menu.plz@gmail.com>',
-        to: "digit.menu.plz@gmail.com",
-        subject: "new contact ",
-
-        html: output,
+        from: '"client" <digit.menu.plz@gmail.com>', // sender address
+        to: 'digit.menu.plz@gmail.com', // list of receivers
+        subject: 'Test Email', // Subject line
+        text: 'Hello world ?', // plain text body
+        html: output, // html body
       });
+
+      //----------------
 
       // console.log("Message sent: %s", info.messageId);
 
       // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
       res.status(201).json({
-        message: "mail sent",
+        message: 'mail sent',
       });
     } catch (error) {
       next(error);
