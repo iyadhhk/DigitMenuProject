@@ -28,7 +28,7 @@ router.post(
         throw error;
       }
       const { username, password, role, restaurantId } = req.body;
-      const existedUser = await User.findOne({ username });
+      const existedUser = await User.findOne({ username, restaurantId });
       if (existedUser) {
         const error = new Error('username already exists');
         error.statusCode = 409;
